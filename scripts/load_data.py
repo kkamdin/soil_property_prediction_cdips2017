@@ -7,7 +7,7 @@ DEFAULT_TEST_DATA=DEFAULT_DATA_DIR + '/' + 'sorted_test.csv'
 
 
 def load_training_spectra(data_path=DEFAULT_TRAINING_DATA, include_depth=False, include_pidn=False):
-    """ Return the wavenumer colnums of the training set with the m stripped (with option to inlude sample depth and pidn) as a
+    """ Return the wavenumber columns of the training set with the m stripped (with option to inlude sample depth and pidn) as a
         pandas DataFrame. Return the targets as well, but in a separate pandas DataFrame""" 
     #get all the training data
     data = pd.read_csv(data_path)
@@ -30,7 +30,7 @@ def load_training_spectra(data_path=DEFAULT_TRAINING_DATA, include_depth=False, 
 
 
 def load_training_satellite_data(data_path=DEFAULT_TRAINING_DATA, include_depth=False, include_pidn=False):
-    """ Return the satellite data colnums of the training set (with options to inlude sample depth and pidn) as a
+    """ Return the satellite data columns of the training set (with options to inlude sample depth and pidn) as a
         pandas DataFrame. Return the targets as well, but in a separate pandas DataFrame""" 
     #get all the training data
     data = pd.read_csv(data_path)
@@ -49,7 +49,7 @@ def load_training_satellite_data(data_path=DEFAULT_TRAINING_DATA, include_depth=
 
 
 def load_all_training_data(data_path=DEFAULT_TRAINING_DATA, include_pidn=False):
-    """ Return the all the data colnums of the training set (with option to include pidn) as a
+    """ Return the all the data columns of the training set (with option to include pidn) as a
         pandas DataFrame. Wavenumbers are stripped of the leading 'm'. Return the targets as well,
          but in a separate pandas DataFrame""" 
     #get all the training data
@@ -73,7 +73,7 @@ def load_all_training_data(data_path=DEFAULT_TRAINING_DATA, include_pidn=False):
 
 
 def load_test_spectra(data_path=DEFAULT_TEST_DATA, include_depth=False, include_pidn=False):
-    """ Return the wavenumer colnums of the test set with the m stripped (with option to inlude sample depth and pidn) as a
+    """ Return the wavenumer columns of the test set with the m stripped (with option to inlude sample depth and pidn) as a
         pandas DataFrame. Return the targets as well, but in a separate pandas DataFrame""" 
     #get all the test data
     data = pd.read_csv(data_path)
@@ -96,7 +96,7 @@ def load_test_spectra(data_path=DEFAULT_TEST_DATA, include_depth=False, include_
 
 
 def load_test_satellite_data(data_path=DEFAULT_TEST_DATA, include_depth=False, include_pidn=False):
-    """ Return the satellite data colnums of the test set (with options to inlude sample depth and pidn) as a
+    """ Return the satellite data columns of the test set (with options to inlude sample depth and pidn) as a
         pandas DataFrame. Return the targets as well, but in a separate pandas DataFrame""" 
     #get all the test data
     data = pd.read_csv(data_path)
@@ -114,7 +114,7 @@ def load_test_satellite_data(data_path=DEFAULT_TEST_DATA, include_depth=False, i
 
 
 def load_all_test_data(data_path=DEFAULT_TEST_DATA, include_pidn=False):
-    """ Return the all the data colnums of the test set (with option to include pidn) as a
+    """ Return the all the data columns of the test set (with option to include pidn) as a
         pandas DataFrame. Wavenumbers are stripped of the leading 'm'. Return the targets as well,
          but in a separate pandas DataFrame""" 
     #get all the test data
