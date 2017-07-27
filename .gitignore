@@ -1,6 +1,3 @@
-# keep data off GitHub
-data/
-
 # machine-specific files
 .py[ocd]
 __pycache__/
