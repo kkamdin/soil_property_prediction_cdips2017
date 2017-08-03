@@ -22,6 +22,21 @@ def scoreSVR(SVR_models, X_test, y_test):
 
     return score
 
+def MCRMSE(model, X, y):
+
+    if type(model) is list:
+        y_pred = np.zeros(y.shape)
+        for output_idx,sub_model in enumerate(model):
+            y_pred[:, output_idx] = sub_model.predict(X)
+    else:
+        y_pred = model.predict(X)
+
+    error = y_pred - y
+    root_mean_square_error = np.sqrt(np.mean(np.square(error),axis=0))
+    mean_columnwise_root_mean_square_error = np.mean(root_mean_square_error)
+
+    return mean_columnwise_root_mean_square_error
+
 def compare_models(models, model_names, PCA, X, y, num_splits=20):
     num_models = len(models)
 
@@ -37,15 +52,17 @@ def compare_models(models, model_names, PCA, X, y, num_splits=20):
             X_train = PCA.fit_transform(X_train)
             X_test = PCA.transform(X_test)
 
-            if name != 'Support Vector Machine':
+            if type(model) != list:
                 model.fit(X_train, y_train)
-                train_score = model.score(X_train, y_train)
-                test_score = model.score(X_test, y_test)
+                #train_score = model.score(X_train, y_train)
+                #test_score = model.score(X_test, y_test)
             else:
                 trainSVR(model, X_train, y_train)
-                train_score = scoreSVR(model, X_train, y_train)
-                test_score =scoreSVR(model, X_test, y_test)
+                #train_score = scoreSVR(model, X_train, y_train)
+                #test_score =scoreSVR(model, X_test, y_test)
 
+            train_score = MCRMSE(model, X_train, y_train)
+            test_score = MCRMSE(model, X_test, y_test)
             train_scores[split_idx, model_idx] = train_score
             test_scores[split_idx, model_idx] = test_score
 
@@ -54,26 +71,32 @@ def compare_models(models, model_names, PCA, X, y, num_splits=20):
 def comparison_plot(model_names, train_scores, test_scores):
     num_splits, num_models = train_scores.shape
     mean_trains = np.mean(train_scores, axis = 0)
-    sem_trains = np.std(train_scores, axis = 0, ddof=1)/np.sqrt(num_splits)
+    std_trains = np.std(train_scores, axis = 0, ddof=1)
     mean_tests = np.mean(test_scores, axis = 0)
-    sem_tests = np.std(test_scores, axis = 0 , ddof=1)/np.sqrt(num_splits)
+    std_tests = np.std(test_scores, axis = 0 , ddof=1)
 
     plt.figure(figsize=(12,6))
     width = 0.1
+
+    xmin = 0-width*2; xmax = 0.6+width*(num_models+1.5)
+    plt.hlines(0.4, xmin, xmax, linewidth=4, label='Kaggle Top 10%',
+                              linestyle='--', alpha=0.5, color='gray',
+                                )
 
     for model_idx,name in enumerate(model_names):
         ys = [mean_trains[model_idx], mean_tests[model_idx]]
         xs = [0+width*model_idx, 0.6+width*model_idx]
         plt.bar(xs, ys, width = width, label=name, alpha=0.75, linewidth=4, edgecolor='white')
         plt.errorbar(xs, [mean_trains[model_idx], mean_tests[model_idx]],
-                     yerr = [sem_trains[model_idx], sem_tests[model_idx]],
+                     yerr = [std_trains[model_idx], std_tests[model_idx]],
                     linewidth=4,
                      color='grey', linestyle='None',
                     )
 
-    plt.xlim([0-width*2, 0.6+width*(num_models+1.5)])
+
+    plt.xlim([xmin, xmax])
     plt.yticks([0,0.5,1.0])
     plt.xticks([0+width*1.5,0.6+width*1.5], ["Train", "Test"], fontsize='xx-large')
-    plt.ylabel(r'$R^2$')
+    plt.ylabel('Error')
     plt.title("Model Performance", fontweight='bold',)
     plt.legend(loc=(1.01,0.6));
