@@ -4,18 +4,18 @@ import matplotlib.pyplot as plt
 import sklearn.metrics
 import sklearn.model_selection
 
-def trainSVR(SVR_models, X_train, y_train):
-    for output_idx, SVR_model in enumerate(SVR_models):
-        SVR_model.fit(X_train, y_train.iloc[:, output_idx])
+def train_ensemble(ensemble, X_train, y_train):
+    for output_idx, model in enumerate(ensemble):
+        model.fit(X_train, y_train.iloc[:, output_idx])
 
-def scoreSVR(SVR_models, X_test, y_test):
+def score_ensemble(ensemble, X_test, y_test):
 
-    score = np.zeros(len(SVR_models))
+    score = np.zeros(len(ensemble))
     y_pred = np.zeros(y_test.shape)
 
-    for output_idx,SVR_model in enumerate(SVR_models):
+    for output_idx, model in enumerate(ensemble):
         y = y_test.iloc[:, output_idx]
-        y_hat = SVR_model.predict(X_test)
+        y_hat = model.predict(X_test)
         y_pred[:, output_idx] = y_hat
 
     score = sklearn.metrics.r2_score(y_test, y_pred, multioutput='variance_weighted')
@@ -57,7 +57,7 @@ def compare_models(models, model_names, PCA, X, y, num_splits=20):
                 #train_score = model.score(X_train, y_train)
                 #test_score = model.score(X_test, y_test)
             else:
-                trainSVR(model, X_train, y_train)
+                train_ensemble(model, X_train, y_train)
                 #train_score = scoreSVR(model, X_train, y_train)
                 #test_score =scoreSVR(model, X_test, y_test)
 
