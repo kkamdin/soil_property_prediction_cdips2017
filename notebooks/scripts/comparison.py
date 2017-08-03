@@ -78,25 +78,31 @@ def comparison_plot(model_names, train_scores, test_scores):
     plt.figure(figsize=(12,6))
     width = 0.1
 
-    xmin = 0-width*2; xmax = 0.6+width*(num_models+1.5)
+    xmin = 0.6-width*2; xmax = 0.6+width*(num_models+1.5)
     plt.hlines(0.4, xmin, xmax, linewidth=4, label='Kaggle Top 10%',
                               linestyle='--', alpha=0.5, color='gray',
                                 )
 
     for model_idx,name in enumerate(model_names):
-        ys = [mean_trains[model_idx], mean_tests[model_idx]]
-        xs = [0+width*model_idx, 0.6+width*model_idx]
+        #ys = [mean_trains[model_idx], mean_tests[model_idx]]
+        #xs = [0+width*model_idx, 0.6+width*model_idx]
+        ys = [mean_tests[model_idx]]
+        xs = [0.6+width*model_idx]
         plt.bar(xs, ys, width = width, label=name, alpha=0.75, linewidth=4, edgecolor='white')
-        plt.errorbar(xs, [mean_trains[model_idx], mean_tests[model_idx]],
-                     yerr = [std_trains[model_idx], std_tests[model_idx]],
-                    linewidth=4,
-                     color='grey', linestyle='None',
-                    )
-
+        #plt.errorbar(xs, [mean_trains[model_idx], mean_tests[model_idx]],
+        #             yerr = [std_trains[model_idx], std_tests[model_idx]],
+        #            linewidth=4,
+        #             color='grey', linestyle='None',
+        #            )
+        plt.errorbar(xs, ys,
+             yerr = [std_tests[model_idx]],
+            linewidth=4,
+             color='grey', linestyle='None',
+            )
 
     plt.xlim([xmin, xmax])
     plt.yticks([0,0.5,1.0])
-    plt.xticks([0+width*1.5,0.6+width*1.5], ["Train", "Test"], fontsize='xx-large')
-    plt.ylabel('Error')
+    plt.xticks([0.6+width*(num_models//2)], ["Test"],)
+    plt.ylabel('RMS Error')
     plt.title("Model Performance", fontweight='bold',)
     plt.legend(loc=(1.01,0.6));
