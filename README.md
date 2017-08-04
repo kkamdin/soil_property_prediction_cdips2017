@@ -1,12 +1,30 @@
 # Soil Property Prediction - CDIPS-DSW 2017
 
-Working repo for a project in the
+#### [Binder](beta.mybinder.org)-deployed repository of educational notebooks for data science based on [Africa Soil Information Service](http://africasoils.net/services/data/soil-databases/)'s [kaggle competition dataset](https://www.kaggle.com/c/afsis-soil-properties).
+
+These notebooks are an educational tool
+for folks who are interested in learning more about
+data science in Python.
+They serve as an introduction to using
+[scikit-learn](scikit-learn.org)
+to build, fit, and select between
+machine learning models,
+using the problem of predicting
+the chemical properties
+
+You can clone this repo to your own machine
+and use the
+`requirements.txt`
+file to install the dependencies
+with `pip`.
+
+Or, you can open
+[this link](https://beta.mybinder.org/v2/gh/kkamdin/soil_property_prediction_cdips2017/master)
+in an incognito browser window to be dropped into a
+fully-fledged, interactive computational environment
+where you can run these notebooks, free of charge!
+
+This project was a part of the
 [2017 Data Science Workshop](http://cdips.physics.berkeley.edu/2017-cdips-data-science-workshop/)
 organized by the
 [Career Development Initiative in the Physical Sciences](http://cdips.physics.berkeley.edu/).
-
-Our project is based on the
-[Africa Soil Information Service](http://africasoils.net/services/data/soil-databases/)'s
-[kaggle competition dataset](https://www.kaggle.com/c/afsis-soil-properties).
-Our goal is to predict critical soil properties, like pH and phosophrous content,
-from readily-acquired infrared spectroscopic data.
