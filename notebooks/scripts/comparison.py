@@ -79,7 +79,7 @@ def comparison_plot(model_names, train_scores, test_scores):
     width = 0.1
 
     xmin = 0.6-width*2; xmax = 0.6+width*(num_models+1.5)
-    plt.hlines(0.4, xmin, xmax, linewidth=4, label='Kaggle Top 10%',
+    plt.hlines([0.4, 0.36], xmin, xmax, linewidth=4, label='Kaggle Top 10%',
                               linestyle='--', alpha=0.5, color='gray',
                                 )
 
