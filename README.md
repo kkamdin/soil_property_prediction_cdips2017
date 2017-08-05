@@ -11,18 +11,22 @@ to build, fit, and select between
 machine learning models,
 using the problem of predicting
 the chemical properties
+of soil from
+[infrared spectral measurements](https://en.wikipedia.org/wiki/Infrared_spectroscopy).
 
-You can clone this repo to your own machine
-and use the
-`requirements.txt`
-file to install the dependencies
-with `pip`.
-
-Or, you can open
+If you open
 [this link](https://beta.mybinder.org/v2/gh/kkamdin/soil_property_prediction_cdips2017/master)
 in an incognito browser window to be dropped into a
 fully-fledged, interactive computational environment
 where you can run these notebooks, free of charge!
+
+Alternatively, you can view static versions
+of the notebooks online, via this GitHub repo,
+or you can clone this repo to your own machine
+and use the
+`requirements.txt`
+file to install the dependencies
+with `pip`.
 
 This project was a part of the
 [2017 Data Science Workshop](http://cdips.physics.berkeley.edu/2017-cdips-data-science-workshop/)
