@@ -16,8 +16,9 @@ of soil from
 
 If you open
 [this link](https://beta.mybinder.org/v2/gh/kkamdin/soil_property_prediction_cdips2017/master)
-in an incognito browser window you'll be dropped into a
+you'll be dropped into a
 fully-fledged, interactive computational environment
+in your browser window
 where you can run these notebooks, free of charge!
 
 Alternatively, you can view static versions
